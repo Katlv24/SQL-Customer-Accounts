@@ -1,0 +1,18 @@
+mysql> use final;
+Database changed
+
+mysql> select a.C_ID, d.balance,
+    -> (case when b.type_of_transaction = 'W' then amount_1 else 0 end) as total_withdrawal,
+    -> (case when b.type_of_transaction = 'D' then amount_1 else 0 end) as total_deposit
+    -> from customer a, transaction b, account d
+    -> where (b.c_id = d.c_id) and (a.c_id = b.C_ID)
+    -> group by b.C_ID;
+
+
+mysql> select a.c_ID, a.city, a.state, b.type_of_transaction, c.creditcard_status from customer a, credit_Card c, transaction b
+    -> where (b.month = '1')
+    -> group by type_of_transaction;
+
+mysql> select a.c_ID, a.city, a.state, b.month from customer a, credit_Card c, transaction b
+    -> where (type_of_transaction = 'C_TO_S') and (a.C_ID=B.C_ID)
+    -> group by month;
